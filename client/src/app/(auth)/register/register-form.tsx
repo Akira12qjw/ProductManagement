@@ -22,9 +22,11 @@ import { toast, useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { handleErrorApi } from "@/lib/utils";
 import { useState } from "react";
+import { useAppContext } from "@/app/app-provider";
 
 const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
+  const { setUser } = useAppContext();
   const { toast } = useToast();
   const router = useRouter();
   // 1. Define your form.
@@ -52,7 +54,8 @@ const RegisterForm = () => {
       toast({
         description: result.payload.message,
       });
-      router.push("/me");
+      setUser(result.payload.data.account);
+      router.push("/");
     } catch (error: any) {
       handleErrorApi({
         error,

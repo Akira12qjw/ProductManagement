@@ -19,9 +19,11 @@ import authApiRequest from "@/apiRequests/auth";
 import { useRouter } from "next/navigation";
 import { handleErrorApi } from "@/lib/utils";
 import { useState } from "react";
+import { useAppContext } from "@/app/app-provider";
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
+  const { setUser } = useAppContext();
   const { toast } = useToast();
   const router = useRouter();
   // 1. Define your form.
@@ -49,7 +51,8 @@ const LoginForm = () => {
       toast({
         description: result.payload.message,
       });
-      router.push("/me");
+      setUser(result.payload.data.account);
+      router.push("/");
       router.refresh();
     } catch (error: any) {
       console.log("Error", error);
