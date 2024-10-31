@@ -18,7 +18,7 @@ export default function ProductEditButton({
   return (
     <TableCell className="text-right">
       <Link href={`/products/${product.id}/edit`}>
-        <Button variant={"outline"}>Chỉnh sửa</Button>
+        <Button variant={"outline"}>Chỉnh sửa món</Button>
       </Link>
       <DeleteProduct product={product} />
     </TableCell>
