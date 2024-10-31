@@ -7,7 +7,9 @@ import {
 } from "@/schemaValidations/product.schema";
 
 export const productApiRequest = {
-  getList: () => http.get<ProductListResType>("/products"),
+  getList: () => http.get<ProductListResType>("/products", {
+    cache: "no-store",
+  }),
   getDetail: (id: number) =>
     http.get<ProductResType>(`/products/${id}`, {
       cache: "no-store",
